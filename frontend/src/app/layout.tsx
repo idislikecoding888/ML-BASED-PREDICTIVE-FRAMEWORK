@@ -2,8 +2,8 @@ import "./globals.css"
 import Navbar from "@/components/layout/Navbar"
 
 export const metadata = {
-  title: "Therapy AI",
-  description: "AI powered mental health screening"
+  title: "CheckMyMind.com",
+  description: "ML Based Predictive Framework for Therapy Needs using SCL90"
 }
 
 export default function RootLayout({

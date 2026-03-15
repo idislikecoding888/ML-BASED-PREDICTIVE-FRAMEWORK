@@ -1,5 +1,6 @@
 "use client"
 
+import { motion, AnimatePresence } from "framer-motion"
 import questions from "@/data/scl90.json"
 import { useState } from "react"
 import QuestionCard from "./QuestionCard"
@@ -72,11 +73,25 @@ export default function QuestionForm() {
 
 
     {/* Question Card */}
+    <AnimatePresence mode="wait">
+
+  <motion.div
+    key={current}
+    initial={{ opacity: 0, y: 15 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -15 }}
+    transition={{ duration: 0.25 }}
+  >
+
     <QuestionCard
       question={questions[current].text}
       options={options}
       onSelect={handleSelect}
     />
+
+  </motion.div>
+
+</AnimatePresence>
 
   </div>
 

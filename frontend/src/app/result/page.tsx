@@ -93,14 +93,14 @@ export default function ResultPage() {
           </Link>
         </div>
 
-        <div className="pt-4">
+        {/* <div className="pt-4">
           <Link
             href="/"
             className="inline-block px-5 py-2 rounded-lg bg-indigo-600 text-white text-sm hover:bg-indigo-700 transition"
           >
             Home
           </Link>
-        </div>
+        </div> */}
 
       </div>
 

@@ -1,24 +1,29 @@
+"use client"
+
+import { useState } from "react"
 import QuestionForm from "@/components/questionnaire/QuestionForm"
+import RulesCard from "@/components/assessment/RulesCard"
 
 export default function AssessmentPage(){
 
+  const [started, setStarted] = useState(false)
+
   return (
-    <div className="space-y-10">
 
-      <div className="text-center space-y-3">
+    <div className="max-w-3xl mx-auto py-10">
 
-        <h1 className="text-3xl font-bold">
-          Mental Health Assessment
-        </h1>
+      {!started ? (
 
-        <p className="text-gray-500">
-          Answer a few questions to receive a psychological screening report.
-        </p>
+        <RulesCard onStart={() => setStarted(true)} />
 
-      </div>
+      ) : (
 
-      <QuestionForm />
+        <QuestionForm />
+
+      )}
 
     </div>
+
   )
+
 }
