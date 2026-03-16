@@ -1,5 +1,6 @@
 "use client"
 
+import AIProcessingScreen from "@/components/ui/ProcessingScreen"
 import { motion, AnimatePresence } from "framer-motion"
 import questions from "@/data/scl90.json"
 import { useState } from "react"
@@ -7,6 +8,7 @@ import QuestionCard from "./QuestionCard"
 import ProgressBar from "../ui/ProgressBar"
 import { submitAnswers } from "@/lib/api"
 import { useRouter } from "next/navigation"
+
 
 const options = [
   { label: "Not at all", value: 0 },
@@ -22,6 +24,7 @@ export default function QuestionForm() {
 
   const [current, setCurrent] = useState(0)
   const [answers, setAnswers] = useState<(string | number)[]>([])
+  const [loading, setLoading] = useState(false)
 
   const handleSelect = async (value: number) => {
 
@@ -32,21 +35,29 @@ export default function QuestionForm() {
     setCurrent(current + 1)
   } else {
 
-    const result = await submitAnswers({
-      answers: newAnswers
-    })
+  setLoading(true)
 
-    localStorage.setItem("result", JSON.stringify(result))
+  const result = await submitAnswers({
+    answers: newAnswers
+  })
 
-    router.push("/result")
-  }
+  localStorage.setItem("result", JSON.stringify(result))
+
+  router.push("/result")
+
 }
+}
+
+
 
   const progress = (answers.length / questions.length) * 100
 
+  if (loading) {
+  return <AIProcessingScreen />
+}
   return (
 
-  <div className="space-y-6">
+  <div className="space-y-8">
 
     {/* Progress Bar */}
     <div className="space-y-2">
@@ -56,12 +67,7 @@ export default function QuestionForm() {
         <span>{Math.round(progress)}%</span>
       </div>
 
-      <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-indigo-500 transition-all duration-300"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
+      <ProgressBar progress={progress} />
 
     </div>
 
@@ -92,6 +98,8 @@ export default function QuestionForm() {
   </motion.div>
 
 </AnimatePresence>
+
+
 
   </div>
 
