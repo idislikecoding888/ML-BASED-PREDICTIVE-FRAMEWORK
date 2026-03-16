@@ -4,11 +4,5 @@ pandas
 numpy
 scikit-learn
 joblib
-<<<<<<< HEAD
-google-generativeai
 python-dotenv
 groq
-=======
-python-dotenv
-groq
->>>>>>> 97e306a47d25ccb51f3eaab789436b8db0ebff76
