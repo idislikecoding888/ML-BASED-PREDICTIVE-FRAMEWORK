@@ -29,7 +29,7 @@ export default function StartPage() {
         ? { anonymous: true }
         : { name, phone }
 
-    await axios.post("http://127.0.0.1:8000/user", payload)
+    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user`, payload)
 
     router.push("/assessment")
   }
