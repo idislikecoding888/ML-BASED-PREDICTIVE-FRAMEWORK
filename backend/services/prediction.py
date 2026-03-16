@@ -9,6 +9,8 @@ model_path = os.path.join(BASE_DIR, "model", "rf_model.pkl")
 
 model = joblib.load(model_path)
 
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"Model file not found at {model_path}")
 
 def predict_intervention(tscores):
 
