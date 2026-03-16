@@ -29,9 +29,16 @@ export default function StartPage() {
         ? { anonymous: true }
         : { name, phone }
 
-    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user`, payload)
+    // await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user`, payload)
 
-    router.push("/assessment")
+    // router.push("/assessment")
+    try {
+  await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user`, payload)
+} catch (err) {
+  console.error("User save failed:", err)
+}
+
+router.push("/assessment")
   }
 
   return (
