@@ -21,9 +21,13 @@ def compute_dimension_averages(answers):
 
 def compute_t_scores(averages):
 
-    # RAW value used for lookup
-    raw = averages["ANX"]
+    tscores = {}
 
-    tscores = lookup_tscore(raw)
+    for dimension, raw in averages.items():
+
+        mapped = lookup_tscore(raw)
+
+        # extract only the value for that dimension
+        tscores[dimension] = mapped[dimension]
 
     return tscores
