@@ -8,40 +8,27 @@ load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 
-def generate_summary(prediction):
+def generate_summary(prediction, tscores):
     prompt = f"""
-You are explaining the results of a psychological screening tool based on the SCL-90 symptom dimensions.
+You are a clinical mental health assistant.
 
-User scores were analyzed across the following dimensions:
-- Somatization
-- Obsessive-Compulsive tendencies
-- Interpersonal Sensitivity
-- Depression
-- Anxiety
-- Hostility
-- Phobic Anxiety
-- Paranoid Ideation
-- Psychoticism
+Given the following SCL-90 T-scores:
 
-The system predicted the most relevant support approach: {prediction}
+{tscores}
 
-Your job:
-Explain the results in a way that makes the user feel understood and supported.
+Prediction: {prediction}
 
-Guidelines:
-- Speak in a warm, human tone.
-- Briefly acknowledge that many people experience these feelings during stress, life changes, academic pressure, relationships, or uncertainty.
-- Mention that elevated scores in these areas can reflect emotional strain, overthinking, low mood, or anxiety that many individuals go through.
-- Help the user understand that their responses suggest certain emotional patterns, but they are not alone in feeling this way.
-- Encourage reflection and self-care.
-- Suggest that talking to a mental health professional may be helpful if these feelings persist.
+Your task:
+- Analyze the scores dimension-wise
+- Highlight ONLY the significantly elevated dimensions (>65)
+- Explain what these elevated scores indicate in simple psychological terms
+- Be specific and analytical, NOT generic or overly comforting
+- Avoid cliché phrases like "you're not alone" or "it's normal"
+- Keep the explanation concise and professional (4–5 sentences max)
+- This is a diagnosis, keep it clear.
+- If multiple dimensions are high, explain how they may interact.
 
-Important rules:
-- This is NOT a diagnosis.
-- Do NOT act as a therapist.
-- Avoid medical claims.
-- Write 4–6 sentences maximum.
-- Make the user feel heard and supported.
+Focus on insights, not emotional reassurance.
 """
 
     completion = client.chat.completions.create(
