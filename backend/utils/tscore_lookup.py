@@ -17,10 +17,10 @@ def lookup_tscore(raw_avg):
     return {
         "SOM": int(row["SOM"]),
         "OC": int(row["OC"]),
+        "IS": int(row["IC"]),
         "DEP": int(row["DEP"]),
         "ANX": int(row["ANX"]),
         "HOS": int(row["HOS"]),
         "PHOB": int(row["PHOB"]),
-        "PAR": int(row["PAR"]),
-        "PSY": int(row["PSY"])
+        "PAR": int(row["PAR"])
     }
