@@ -97,7 +97,7 @@ def predict(data: SurveyRequest):
     prediction = predict_intervention(tscores)
 
     try:
-        explanation = generate_summary(prediction)
+        explanation = generate_summary(prediction, tscores)
     except Exception:
         explanation = "AI explanation is unavailable, our API Key limit must have reached, please wait for 24 hours. Sorry for the inconvenience caused."
 
