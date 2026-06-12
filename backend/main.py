@@ -98,8 +98,9 @@ def predict(data: SurveyRequest):
 
     try:
         explanation = generate_summary(prediction, tscores)
-    except Exception:
-        explanation = "AI explanation is unavailable, our API Key limit must have reached, please wait for 24 hours. Sorry for the inconvenience caused."
+    except Exception as e:
+    	explanation = f"AI Error: {str(e)}"
+    	print("GROQ ERROR:", e)
 
 
     return {

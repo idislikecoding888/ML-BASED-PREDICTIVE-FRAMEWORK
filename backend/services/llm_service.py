@@ -10,26 +10,65 @@ client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 def generate_summary(prediction, tscores):
     prompt = f"""
-You are a clinical mental health assistant.
+You are an expert clinical psychologist and psychometric assessment specialist.
 
-Given the following SCL-90 T-scores:
+SCL-90 T-SCORES:
 
 {tscores}
 
-Prediction: {prediction}
+MODEL PREDICTION:
 
-Your task:
-- Analyze the scores dimension-wise
-- Highlight ONLY the significantly elevated dimensions (>65)
-- Explain what these elevated scores indicate in simple psychological terms
-- Be specific and analytical, NOT generic or overly comforting
-- Avoid cliché phrases like "you're not alone" or "it's normal"
-- Keep the explanation concise and professional (4–5 sentences max)
-- This is a diagnosis, keep it clear.
-- If multiple dimensions are high, explain how they may interact.
+{prediction}
 
-Focus on insights, not emotional reassurance.
+Generate a detailed psychological assessment report based strictly on the provided T-scores.
+
+Interpret T-scores using:
+
+* Below 55: Within normal range
+* 55-64: Mild elevation
+* 65-74: Clinically significant elevation
+* 75 and above: Severe elevation
+
+Requirements:
+
+1. Explain the overall psychological profile.
+2. Identify the most elevated symptom dimensions.
+3. Explain what each elevated dimension may indicate psychologically.
+4. Discuss possible interactions between elevated dimensions.
+5. Explain potential impact on:
+
+   * Emotional well-being
+   * Academic or work performance
+   * Social relationships
+   * Daily functioning
+6. Discuss the significance of the machine learning prediction.
+7. Mention dimensions that appear relatively normal.
+8. Use professional psychological language.
+9. Do not provide emotional reassurance.
+10. Do not claim a definitive clinical diagnosis.
+11. Base all conclusions only on the provided scores.
+
+Structure the report as:
+
+# Executive Summary
+
+# Key Elevated Dimensions
+
+# Psychological Interpretation
+
+# Functional Impact
+
+# Risk Assessment
+
+# Overall Conclusion
+
+The report should be analytical, detailed, and approximately 400-800 words.
+
+Do not use markdown tables.
+
+Use section headings and bullet points only.
 """
+
 
     completion = client.chat.completions.create(
         model="groq/compound",

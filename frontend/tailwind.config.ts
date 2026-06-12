@@ -1,3 +1,7 @@
+plugins: [
+  require("@tailwindcss/typography")
+]
+
 import type { Config } from "tailwindcss"
 
 const config: Config = {
